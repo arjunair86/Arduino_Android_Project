@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.UUID;
  */
 
 public class MotorControl extends AppCompatActivity {
-    Button upButton, downButton, leftButton, rightButton, disconnectButton, onButton, offButton;
+    Button upButton, downButton, leftButton, rightButton, disconnectButton, onOffButton;
     BluetoothAdapter bluetoothAdapter = null;
     String address = null;
     private ProgressDialog progressDialog;
@@ -36,8 +37,7 @@ public class MotorControl extends AppCompatActivity {
         setContentView(R.layout.motor_control);
 
 
-        onButton = (Button)findViewById(R.id.onButton);
-        offButton = (Button)findViewById(R.id.offButton);
+        onOffButton = (Button)findViewById(R.id.onOffButton);
         upButton = (Button)findViewById(R.id.upButton);
         downButton = (Button)findViewById(R.id.downButton);
         leftButton = (Button)findViewById(R.id.leftButton);
@@ -50,35 +50,34 @@ public class MotorControl extends AppCompatActivity {
         ConnectBT connectBT = new ConnectBT();
         connectBT.execute();
 
-        onButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "on", Toast.LENGTH_SHORT).show();
-                if(bluetoothSocket != null){
-                    try {
-                        bluetoothSocket.getOutputStream().write("1".toString().getBytes());
-                        Log.d("LEDCONTROL: ", "SENTBYTES "+"1".toString().getBytes());
-                        Log.d("LEDCONTROL: ", "SENT "+"1".toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
 
-        offButton.setOnClickListener(new View.OnClickListener() {
+        onOffButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "off", Toast.LENGTH_SHORT).show();
-                if(bluetoothSocket != null){
-                    try {
-                        bluetoothSocket.getOutputStream().write("0".toString().getBytes());
-                        Log.d("LEDCONTROL: ", "SENTBYTES "+"0".toString().getBytes());
-                        Log.d("LEDCONTROL: ", "SENT "+"0".toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    Toast.makeText(getApplicationContext(), "action down", Toast.LENGTH_SHORT).show();
+                    if(bluetoothSocket != null){
+                        try {
+                            bluetoothSocket.getOutputStream().write("1".toString().getBytes());
+                            Log.d("LEDCONTROL: ", "SENTBYTES "+"1".toString().getBytes());
+                            Log.d("LEDCONTROL: ", "SENT "+"1".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }else if(event.getAction() == MotionEvent.ACTION_UP){
+                    Toast.makeText(getApplicationContext(), "action up", Toast.LENGTH_SHORT).show();
+                    if(bluetoothSocket != null){
+                        try {
+                            bluetoothSocket.getOutputStream().write("0".toString().getBytes());
+                            Log.d("LEDCONTROL: ", "SENTBYTES "+"0".toString().getBytes());
+                            Log.d("LEDCONTROL: ", "SENT "+"0".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+                return false;
             }
         });
 
