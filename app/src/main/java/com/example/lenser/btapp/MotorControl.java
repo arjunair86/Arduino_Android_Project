@@ -81,67 +81,115 @@ public class MotorControl extends AppCompatActivity {
             }
         });
 
-        upButton.setOnClickListener(new View.OnClickListener() {
+        upButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "up", Toast.LENGTH_SHORT).show();
-                if(bluetoothSocket != null){
-                    try {
-                        bluetoothSocket.getOutputStream().write("U".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENTBYTES "+"U".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENT "+"U".toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (bluetoothSocket != null) {
+                        try {
+                            bluetoothSocket.getOutputStream().write("U".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENTBYTES " + "U".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENT " + "U".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (bluetoothSocket != null) {
+                        try {
+                            bluetoothSocket.getOutputStream().write("S".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENTBYTES " + "S".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENT " + "S".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+                return false;
             }
         });
 
-        downButton.setOnClickListener(new View.OnClickListener() {
+        downButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if(bluetoothSocket != null){
-                    Toast.makeText(getApplicationContext(), "down", Toast.LENGTH_SHORT).show();
-                    try {
-                        bluetoothSocket.getOutputStream().write("D".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENTBYTES "+"D".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENT "+"D".toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    if(bluetoothSocket != null) {
+                        try {
+                            bluetoothSocket.getOutputStream().write("D".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENTBYTES " + "D".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENT " + "D".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
+                } else if(event.getAction() == MotionEvent.ACTION_UP){
+                        if(bluetoothSocket != null){
+                            try {
+                                bluetoothSocket.getOutputStream().write("S".toString().getBytes());
+                                Log.d("MOTORCONTROL: ", "SENTBYTES "+"S".toString().getBytes());
+                                Log.d("MOTORCONTROL: ", "SENT "+"S".toString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                return false;
             }
         });
 
-        leftButton.setOnClickListener(new View.OnClickListener() {
+        leftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "left", Toast.LENGTH_SHORT).show();
-                if(bluetoothSocket != null){
-                    try {
-                        bluetoothSocket.getOutputStream().write("L".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENTBYTES "+"L".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENT "+"L".toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    if(bluetoothSocket != null) {
+                        try {
+                            bluetoothSocket.getOutputStream().write("L".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENTBYTES " + "L".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENT " + "L".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
+                } else if(event.getAction() == MotionEvent.ACTION_UP) {
+                        if (bluetoothSocket != null) {
+                            try {
+                                bluetoothSocket.getOutputStream().write("S".toString().getBytes());
+                                Log.d("MOTORCONTROL: ", "SENTBYTES " + "S".toString().getBytes());
+                                Log.d("MOTORCONTROL: ", "SENT " + "S".toString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                return false;
             }
         });
 
-        rightButton.setOnClickListener(new View.OnClickListener() {
+        rightButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "right", Toast.LENGTH_SHORT).show();
-                if(bluetoothSocket != null){
-                    try {
-                        bluetoothSocket.getOutputStream().write("R".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENTBYTES "+"R".toString().getBytes());
-                        Log.d("MOTORCONTROL: ", "SENT "+"R".toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    if(bluetoothSocket != null) {
+                        try {
+                            bluetoothSocket.getOutputStream().write("R".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENTBYTES " + "R".toString().getBytes());
+                            Log.d("MOTORCONTROL: ", "SENT " + "R".toString());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
+                } else if(event.getAction() == MotionEvent.ACTION_UP){
+                        if(bluetoothSocket != null){
+                            try {
+                                bluetoothSocket.getOutputStream().write("S".toString().getBytes());
+                                Log.d("MOTORCONTROL: ", "SENTBYTES "+"S".toString().getBytes());
+                                Log.d("MOTORCONTROL: ", "SENT "+"S".toString());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                return false;
             }
         });
 
