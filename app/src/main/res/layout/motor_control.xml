@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:text="UP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:id="@+id/upButton" />
+
+    <Button
+        android:text="LEFT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/upButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="72dp"
+        android:layout_marginStart="72dp"
+        android:id="@+id/leftButton" />
+
+    <Button
+        android:text="RIGHT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/upButton"
+        android:layout_toRightOf="@+id/upButton"
+        android:layout_toEndOf="@+id/upButton"
+        android:id="@+id/rightButton" />
+
+    <Button
+        android:text="DOWN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/leftButton"
+        android:layout_toLeftOf="@+id/rightButton"
+        android:layout_toStartOf="@+id/rightButton"
+        android:id="@+id/downButton" />
+
+    <Button
+        android:text="DISCONNECT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/downButton"
+        android:layout_alignLeft="@+id/downButton"
+        android:layout_alignStart="@+id/downButton"
+        android:layout_marginTop="146dp"
+        android:id="@+id/disconnectButton" />
+
+    <Button
+        android:text="LED ON"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/downButton"
+        android:layout_alignLeft="@+id/leftButton"
+        android:layout_alignStart="@+id/leftButton"
+        android:layout_marginTop="27dp"
+        android:id="@+id/onButton" />
+
+    <Button
+        android:text="LED OFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/onButton"
+        android:layout_toRightOf="@+id/downButton"
+        android:layout_toEndOf="@+id/downButton"
+        android:id="@+id/offButton" />
+</RelativeLayout>
