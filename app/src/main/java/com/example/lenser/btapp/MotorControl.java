@@ -9,10 +9,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,7 +26,7 @@ import java.util.UUID;
  */
 
 public class MotorControl extends AppCompatActivity {
-    Button upButton, downButton, leftButton, rightButton, disconnectButton, onOffButton;
+    Button upButton, downButton, leftButton, rightButton, disconnectButton, onOffButton, rcvButton;
     BluetoothAdapter bluetoothAdapter = null;
     String address = null;
     private ProgressDialog progressDialog;
@@ -43,12 +46,36 @@ public class MotorControl extends AppCompatActivity {
         leftButton = (Button)findViewById(R.id.leftButton);
         rightButton = (Button)findViewById(R.id.rightButton);
         disconnectButton = (Button)findViewById(R.id.disconnectButton);
+        rcvButton = (Button)findViewById(R.id.btRcvText);
 
         Intent intent = getIntent();
         address = intent.getStringExtra("BT_ADDRESS");
 //        Toast.makeText(getApplicationContext(), "hello"+address, Toast.LENGTH_SHORT).show();
         ConnectBT connectBT = new ConnectBT();
         connectBT.execute();
+
+        rcvButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("Console", "Clicked rcv");
+                byte[] buffer = new byte[1024];
+                int bytes;
+                if(bluetoothSocket != null) {
+                    Log.d("Console", "socket not null");
+                    try {
+                        bluetoothSocket.getInputStream().read(buffer);
+                        Log.d("Console", "bytes: "+buffer);
+                        String mess = new String(buffer);
+//                        String mess = new String(buffer, 0, bytes);
+                        Log.d("BLTrcv", "Message: " + mess);
+                    } catch (IOException e) {
+                        Log.d("Console", "in catch");
+                    }
+                } else{
+                    Log.d("BLTrcv", "NO blt socket");
+                }
+            }
+        });
 
 
         onOffButton.setOnTouchListener(new View.OnTouchListener() {
